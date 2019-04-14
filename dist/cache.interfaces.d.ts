@@ -4,10 +4,8 @@ export interface CacheLayerItem<T> {
     data: T;
 }
 export declare class CacheServiceConfigInterface {
-    deleteOnExpire?: 'aggressive' | string;
     cacheFlushInterval?: number | null;
     localStorage?: boolean;
-    createdAt?: string;
 }
 export interface CacheLayerInterface {
     name: string;

@@ -6,7 +6,10 @@ export declare class CacheLayerInstance<T = {}> {
     config: CacheServiceConfigInterface;
     createdAt: number;
     private map;
-    static createCacheParams(config: any): void;
+    static createCacheParams(config: {
+        key: string;
+        params: any;
+    }): void;
     constructor(layer: CacheLayerInterface);
     private initHook;
     private onExpireAll;

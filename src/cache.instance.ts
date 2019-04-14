@@ -1,4 +1,7 @@
-import { CacheLayerInterface, CacheServiceConfigInterface } from './cache.interfaces';
+import {
+  CacheLayerInterface,
+  CacheServiceConfigInterface
+} from './cache.interfaces';
 import { Observable, BehaviorSubject, of } from 'rxjs';
 import { filter, map, timeoutWith, skip } from 'rxjs/operators';
 
@@ -7,13 +10,13 @@ const FRIENDLY_ERROR_MESSAGES = {
 };
 
 export class CacheLayerInstance<T = {}> {
-
   public items: BehaviorSubject<Array<T>> = new BehaviorSubject([]);
   public name: string;
   public config: CacheServiceConfigInterface;
   public createdAt: number;
-  private map: Map<any, any> = new Map();
-  static createCacheParams(config) {
+  private map: Map<string, any> = new Map();
+  static createCacheParams(config: { key: string; params: any }) {
+    // const params = { key: config, params: PARAMS };
     if (config.params.constructor === Object) {
       return; // Todo
     } else if (config.constructor === String) {
@@ -24,7 +27,6 @@ export class CacheLayerInstance<T = {}> {
       return; // Todo
     }
   }
-
 
   constructor(layer: CacheLayerInterface) {
     this.name = layer.name;
@@ -73,14 +75,19 @@ export class CacheLayerInstance<T = {}> {
     // tslint:disable-next-line:no-string-literal
     const item = this.map.get(layerItem['key']);
     // tslint:disable-next-line:no-string-literal
-    const filteredItems = this.items.getValue().filter(i => i['key'] !== layerItem['key']);
+    const filteredItems = this.items
+      .getValue()
+      .filter(i => i['key'] !== layerItem['key']);
     if (this.config.localStorage) {
-      localStorage.setItem(this.name, JSON.stringify({
-        createdAt: this.createdAt,
-        config: this.config,
-        name: this.name,
-        items: [...filteredItems, item]
-      }));
+      localStorage.setItem(
+        this.name,
+        JSON.stringify({
+          createdAt: this.createdAt,
+          config: this.config,
+          name: this.name,
+          items: [...filteredItems, item]
+        })
+      );
     }
 
     this.items.next([...filteredItems, item]);
@@ -93,12 +100,15 @@ export class CacheLayerInstance<T = {}> {
       .pipe(
         timeoutWith(this.config.cacheFlushInterval, of(1)),
         skip(1)
-      ).subscribe(() => this.removeItem(key));
+      )
+      .subscribe(() => this.removeItem(key));
   }
 
   public removeItem(key: string): void {
     // tslint:disable-next-line:no-string-literal
-    const newLayerItems = this.items.getValue().filter(item => item['key'] !== key);
+    const newLayerItems = this.items
+      .getValue()
+      .filter(item => item['key'] !== key);
     if (this.config.localStorage) {
       const newLayer: CacheLayerInterface = {
         config: this.config,
@@ -113,23 +123,22 @@ export class CacheLayerInstance<T = {}> {
 
   public asObservable(key: string): Observable<T> {
     if (this.map.has(key)) {
-      console.error(`Key: ${key} ${FRIENDLY_ERROR_MESSAGES.MISSING_OBSERVABLE_ITEM}`);
+      console.error(
+        `Key: ${key} ${FRIENDLY_ERROR_MESSAGES.MISSING_OBSERVABLE_ITEM}`
+      );
     }
     return this.items.asObservable().pipe(
       filter(() => this.map.has(key)),
-      map(res => res[0])
+      map(() => this.get(key))
     );
   }
 
   public flushCache(): Observable<boolean> {
-    return this.items.asObservable()
-      .pipe(
-        map(items => {
-          // tslint:disable-next-line:no-string-literal
-          items.forEach(i => this.removeItem(i['key']));
-          return true;
-        })
-      );
+    return new Observable(o => {
+      this.items.getValue().forEach(i => this.removeItem(i['key']));
+      o.next(true);
+      o.complete();
+    });
   }
 
   async fetch<K>(http: string, init?: RequestInit, cache = true): Promise<K> {
@@ -143,5 +152,4 @@ export class CacheLayerInstance<T = {}> {
     }
     return data;
   }
-
 }

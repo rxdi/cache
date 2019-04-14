@@ -31,6 +31,7 @@ class CacheLayerInstance {
         this.initHook(layer);
     }
     static createCacheParams(config) {
+        // const params = { key: config, params: PARAMS };
         if (config.params.constructor === Object) {
             return; // Todo
         }
@@ -108,15 +109,14 @@ class CacheLayerInstance {
         if (this.map.has(key)) {
             console.error(`Key: ${key} ${FRIENDLY_ERROR_MESSAGES.MISSING_OBSERVABLE_ITEM}`);
         }
-        return this.items.asObservable().pipe(operators_1.filter(() => this.map.has(key)), operators_1.map(res => res[0]));
+        return this.items.asObservable().pipe(operators_1.filter(() => this.map.has(key)), operators_1.map(() => this.get(key)));
     }
     flushCache() {
-        return this.items.asObservable()
-            .pipe(operators_1.map(items => {
-            // tslint:disable-next-line:no-string-literal
-            items.forEach(i => this.removeItem(i['key']));
-            return true;
-        }));
+        return new rxjs_1.Observable(o => {
+            this.items.getValue().forEach(i => this.removeItem(i['key']));
+            o.next(true);
+            o.complete();
+        });
     }
     fetch(http, init, cache = true) {
         return __awaiter(this, void 0, void 0, function* () {

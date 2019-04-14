@@ -9,6 +9,5 @@ class CacheServiceConfigInterface {
 exports.CacheServiceConfigInterface = CacheServiceConfigInterface;
 exports.CACHE_MODULE_CONFIG = new core_1.InjectionToken('module.config');
 exports.CACHE_MODULE_DI_CONFIG = {
-    deleteOnExpire: 'aggressive',
     cacheFlushInterval: 60 * 60 * 1000
 };

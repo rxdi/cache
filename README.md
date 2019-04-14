@@ -216,8 +216,7 @@ export class CartProvider {
       config: <CacheServiceConfigInterface>{
         localStorage: true,
         maxAge: 10000,
-        cacheFlushInterval: 10000,
-        deleteOnExpire: 'aggressive'
+        cacheFlushInterval: 10000
       }
     });
     this.items = this.cacheLayer.items;
@@ -299,7 +298,6 @@ export const CACHE_DI_CONFIG = <CacheConfigInterface>{
     localStorage: true,
     maxAge: 15 * 60 * 1000, // Items added to this cache expire after 15 minutes
     cacheFlushInterval: 60 * 60 * 1000, // This cache will clear itself every hour
-    deleteOnExpire: 'aggressive' // Items will be deleted from this cache when they expire
 }
 
 @NgModule({

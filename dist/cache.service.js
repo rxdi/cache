@@ -15,14 +15,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var CacheService_1;
 const core_1 = require("@angular/core");
 const rxjs_1 = require("rxjs");
+const operators_1 = require("rxjs/operators");
 const cache_instance_1 = require("./cache.instance");
 const cache_interfaces_1 = require("./cache.interfaces");
-const operators_1 = require("rxjs/operators");
-const INTERNAL_PROCEDURE_CACHE_NAME = 'cache_layers';
+const INTERNAL_PROCEDURE_CACHE_NAME = "cache_layers";
 const FRIENDLY_ERROR_MESSAGES = {
-    TRY_TO_UNSUBSCRIBE: 'Someone try to unsubscribe from collection directly... agghhh.. read docs! Blame: ',
+    TRY_TO_UNSUBSCRIBE: "Someone try to unsubscribe from collection directly... agghhh.. read docs! Blame: ",
     // tslint:disable-next-line:max-line-length
-    LOCAL_STORAGE_DISABLED: 'LocalStorage is disabled switching to regular in-memory storage.Please relate issue if you think it is enabled and there is a problem with the library itself.'
+    LOCAL_STORAGE_DISABLED: "LocalStorage is disabled switching to regular in-memory storage.Please relate issue if you think it is enabled and there is a problem with the library itself."
 };
 let CacheService = CacheService_1 = class CacheService {
     constructor(config) {
@@ -53,8 +53,8 @@ let CacheService = CacheService_1 = class CacheService {
     static isLocalStorageUsable() {
         const error = [];
         try {
-            localStorage.setItem('test-key', JSON.stringify({ key: 'test-object' }));
-            localStorage.removeItem('test-key');
+            localStorage.setItem("test-key", JSON.stringify({ key: "test-object" }));
+            localStorage.removeItem("test-key");
         }
         catch (e) {
             error.push(e);
@@ -78,8 +78,10 @@ let CacheService = CacheService_1 = class CacheService {
         layer.config = layer.config || this.config || cache_interfaces_1.CACHE_MODULE_DI_CONFIG;
         const cacheLayer = CacheService_1.createCacheInstance(layer);
         if (layer.config.localStorage && CacheService_1.isLocalStorageUsable()) {
-            // tslint:disable-next-line:max-line-length
-            localStorage.setItem(INTERNAL_PROCEDURE_CACHE_NAME, JSON.stringify([...CacheService_1.getsFromLS().filter(l => l !== cacheLayer.name), cacheLayer.name]));
+            localStorage.setItem(INTERNAL_PROCEDURE_CACHE_NAME, JSON.stringify([
+                ...CacheService_1.getsFromLS().filter(l => l !== cacheLayer.name),
+                cacheLayer.name
+            ]));
             localStorage.setItem(cacheLayer.name, JSON.stringify(layer));
         }
         this.map.set(cacheLayer.name, cacheLayer);
@@ -99,14 +101,17 @@ let CacheService = CacheService_1 = class CacheService {
         }
     }
     protectLayerFromInvaders(cacheLayer) {
-        cacheLayer.items.constructor.prototype.unsubsribeFromLayer = cacheLayer.items.constructor.prototype.unsubscribe;
+        cacheLayer.items.constructor.prototype.unsubsribeFromLayer =
+            cacheLayer.items.constructor.prototype.unsubscribe;
         cacheLayer.items.constructor.prototype.unsubscribe = () => {
             console.error(FRIENDLY_ERROR_MESSAGES.TRY_TO_UNSUBSCRIBE + cacheLayer.name);
         };
     }
     OnExpire(layerInstance) {
-        new rxjs_1.Observable(observer => observer.next()).
-            pipe(operators_1.timeoutWith(layerInstance.config.cacheFlushInterval || this.config.cacheFlushInterval, rxjs_1.of(1)), operators_1.skip(1)).subscribe(() => this.remove(layerInstance));
+        new rxjs_1.Observable(observer => observer.next())
+            .pipe(operators_1.timeoutWith(layerInstance.config.cacheFlushInterval ||
+            this.config.cacheFlushInterval, rxjs_1.of(1)), operators_1.skip(1))
+            .subscribe(() => this.remove(layerInstance));
     }
     remove(layerInstance) {
         if (this.config.localStorage) {
@@ -114,8 +119,15 @@ let CacheService = CacheService_1 = class CacheService {
             const leftLocalStorageLayers = CacheService_1.getsFromLS().filter(layer => layer !== layerInstance.name);
             localStorage.setItem(INTERNAL_PROCEDURE_CACHE_NAME, JSON.stringify(leftLocalStorageLayers));
         }
-        layerInstance.flushCache().pipe(operators_1.take(1)).subscribe(() => {
-            this.cachedLayers.next([...this.cachedLayers.getValue().filter(layer => layer.name !== layerInstance.name)]);
+        layerInstance
+            .flushCache()
+            .pipe(operators_1.take(1))
+            .subscribe(() => {
+            this.cachedLayers.next([
+                ...this.cachedLayers
+                    .getValue()
+                    .filter(layer => layer.name !== layerInstance.name)
+            ]);
             this.map.delete(layerInstance.name);
         });
     }
@@ -130,18 +142,20 @@ let CacheService = CacheService_1 = class CacheService {
         return newLayers;
     }
     flushCache(force) {
-        let oldLayersNames;
-        return this.cachedLayers.pipe(operators_1.take(1), operators_1.map(layers => {
-            oldLayersNames = layers.map(l => l.name);
+        return new rxjs_1.Observable(o => {
+            let oldLayersNames;
+            const layers = this.cachedLayers.getValue();
+            oldLayersNames = this.cachedLayers.getValue().map(l => l.name);
             layers.forEach(layer => this.remove(layer));
             if (force) {
                 localStorage.removeItem(INTERNAL_PROCEDURE_CACHE_NAME);
             }
             else {
-                oldLayersNames.forEach((l) => this.create({ name: l }));
+                oldLayersNames.forEach(l => this.create({ name: l }));
             }
-            return true;
-        }));
+            o.next(true);
+            o.complete();
+        });
     }
 };
 CacheService = CacheService_1 = __decorate([
