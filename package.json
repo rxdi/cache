@@ -1,6 +1,6 @@
 {
   "name": "@rxdi/cache",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "module": "./dist/index.js",
@@ -68,7 +68,9 @@
     "transform": {
       "\\.(ts|tsx)$": "ts-jest"
     },
-    "setupFiles":["./test/mocks/localStorage.js"],
+    "setupFiles": [
+      "./test/mocks/localStorage.js"
+    ],
     "testRegex": "/src/.*\\.spec.(ts|tsx|js)$",
     "verbose": true,
     "collectCoverage": true

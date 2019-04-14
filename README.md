@@ -1,6 +1,6 @@
 # @rxdi/cache
 
-![Build Status](http://gitlab.youvolio.com/open-source/ngx-cache-layer/badges/branch/build.svg)
+![Build Status](https://api.travis-ci.org/rxdi/cache.svg?branch=master)
 
 #### @StrongTyped @EasyAPI Created on Angular@2+
 #### @Cache layer with capability to write in LocalStorage

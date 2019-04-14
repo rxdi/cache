@@ -173,14 +173,13 @@ export class CacheService {
     newCacheLayers: CacheLayerInterface[]
   ): CacheLayerInstance<CacheLayerItem<any>>[] {
     const oldLayer = this.get(name);
-    const newLayers = [];
-    newCacheLayers.forEach(layerName => {
+    return [...newCacheLayers].map(layerName => {
       const newLayer = this.create(layerName);
       oldLayer.items.getValue().forEach(item => newLayer.put(item));
-      newLayers.push(newLayer);
+      return newLayer;
     });
-    return newLayers;
   }
+
   public flushCache(force?: boolean): Observable<boolean> {
     return new Observable(o => {
       let oldLayersNames: string[];

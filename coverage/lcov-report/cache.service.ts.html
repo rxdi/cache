@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">75.32% </span>
+        <span class="strong">77.33% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>58/77</span>
+        <span class='fraction'>58/75</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">76.47% </span>
@@ -35,9 +35,9 @@
         <span class='fraction'>18/26</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">76.06% </span>
+        <span class="strong">78.26% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>54/71</span>
+        <span class='fraction'>54/69</span>
       </div>
     </div>
     <p class="quiet">
@@ -244,8 +244,7 @@
 <a name='L196'></a><a href='#L196'>196</a>
 <a name='L197'></a><a href='#L197'>197</a>
 <a name='L198'></a><a href='#L198'>198</a>
-<a name='L199'></a><a href='#L199'>199</a>
-<a name='L200'></a><a href='#L200'>200</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L199'></a><a href='#L199'>199</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -424,9 +423,8 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
@@ -444,26 +442,26 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Inject, Injectable } from "@angular/core";
-import { BehaviorSubject, Observable, of } from "rxjs";
-import { take, map, timeoutWith, skip } from "rxjs/operators";
-import { CacheLayerInstance } from "./cache.instance";
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Inject, Injectable } from '@angular/core';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { take, map, timeoutWith, skip } from 'rxjs/operators';
+import { CacheLayerInstance } from './cache.instance';
 import {
   CacheLayerInterface,
   CacheServiceConfigInterface,
   CacheLayerItem,
   CACHE_MODULE_CONFIG,
   CACHE_MODULE_DI_CONFIG
-} from "./cache.interfaces";
+} from './cache.interfaces';
 &nbsp;
-const INTERNAL_PROCEDURE_CACHE_NAME = "cache_layers";
+const INTERNAL_PROCEDURE_CACHE_NAME = 'cache_layers';
 &nbsp;
 const FRIENDLY_ERROR_MESSAGES = {
   TRY_TO_UNSUBSCRIBE:
-    "Someone try to unsubscribe from collection directly... agghhh.. read docs! Blame: ",
+    'Someone try to unsubscribe from collection directly... agghhh.. read docs! Blame: ',
   // tslint:disable-next-line:max-line-length
   LOCAL_STORAGE_DISABLED:
-    "LocalStorage is disabled switching to regular in-memory storage.Please relate issue if you think it is enabled and there is a problem with the library itself."
+    'LocalStorage is disabled switching to regular in-memory storage.Please relate issue if you think it is enabled and there is a problem with the library itself.'
 };
 &nbsp;
 @Injectable()
@@ -506,8 +504,8 @@ export class CacheService {
   public static isLocalStorageUsable(): boolean {
     const error = [];
     try {
-      localStorage.setItem("test-key", JSON.stringify({ key: "test-object" }));
-      localStorage.removeItem("test-key");
+      localStorage.setItem('test-key', JSON.stringify({ key: 'test-object' }));
+      localStorage.removeItem('test-key');
     } catch (e) {
 <span class="cstat-no" title="statement not covered" >      error.push(e);</span>
 <span class="cstat-no" title="statement not covered" >      console.log(FRIENDLY_ERROR_MESSAGES.LOCAL_STORAGE_DISABLED);</span>
@@ -619,14 +617,13 @@ export class CacheService {
     newCacheLayers: CacheLayerInterface[]
   ): CacheLayerInstance&lt;CacheLayerItem&lt;any&gt;&gt;[] {
     const oldLayer = <span class="cstat-no" title="statement not covered" >this.get(name);</span>
-    const newLayers = <span class="cstat-no" title="statement not covered" >[];</span>
-<span class="cstat-no" title="statement not covered" >    newCacheLayers.forEach(<span class="fstat-no" title="function not covered" >layerName </span>=&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    return [...newCacheLayers].map(<span class="fstat-no" title="function not covered" >layerName </span>=&gt; {</span>
       const newLayer = <span class="cstat-no" title="statement not covered" >this.create(layerName);</span>
 <span class="cstat-no" title="statement not covered" >      oldLayer.items.getValue().forEach(<span class="fstat-no" title="function not covered" >item </span>=&gt; <span class="cstat-no" title="statement not covered" >newLayer.put(item))</span>;</span>
-<span class="cstat-no" title="statement not covered" >      newLayers.push(newLayer);</span>
+<span class="cstat-no" title="statement not covered" >      return newLayer;</span>
     });
-<span class="cstat-no" title="statement not covered" >    return newLayers;</span>
   }
+&nbsp;
   public flushCache(force?: boolean): Observable&lt;boolean&gt; {
     return new Observable(o =&gt; {
       let oldLayersNames: string[];
@@ -640,7 +637,7 @@ export class CacheService {
       }
       o.next(true);
       o.complete();
-    })
+    });
   }
 }
 &nbsp;</pre></td></tr>
@@ -649,7 +646,7 @@ export class CacheService {
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sun Apr 14 2019 20:04:59 GMT+0300 (EEST)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Sun Apr 14 2019 20:23:45 GMT+0300 (EEST)
 </div>
 </div>
 <script src="prettify.js"></script>

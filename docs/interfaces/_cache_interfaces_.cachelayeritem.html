@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>CacheServiceConfigInterface | ngx-cache-layer</title>
+	<title>CacheLayerItem | @rxdi/cache</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../index.html" class="title">ngx-cache-layer</a>
+					<a href="../index.html" class="title">@rxdi/cache</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -56,24 +56,32 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_ngx_cache_layer_interfaces_.html">&quot;ngx-cache-layer.interfaces&quot;</a>
+					<a href="../modules/_cache_interfaces_.html">&quot;cache.interfaces&quot;</a>
 				</li>
 				<li>
-					<a href="_ngx_cache_layer_interfaces_.cacheserviceconfiginterface.html">CacheServiceConfigInterface</a>
+					<a href="_cache_interfaces_.cachelayeritem.html">CacheLayerItem</a>
 				</li>
 			</ul>
-			<h1>Class CacheServiceConfigInterface</h1>
+			<h1>Interface CacheLayerItem&lt;T&gt;</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-type-parameters">
+				<h3>Type parameters</h3>
+				<ul class="tsd-type-parameters">
+					<li>
+						<h4>T</h4>
+					</li>
+				</ul>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">CacheServiceConfigInterface</span>
+						<span class="target">CacheLayerItem</span>
 					</li>
 				</ul>
 			</section>
@@ -84,10 +92,8 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_ngx_cache_layer_interfaces_.cacheserviceconfiginterface.html#cacheflushinterval" class="tsd-kind-icon">cache<wbr>Flush<wbr>Interval</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_ngx_cache_layer_interfaces_.cacheserviceconfiginterface.html#deleteonexpire" class="tsd-kind-icon">delete<wbr>OnExpire</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_ngx_cache_layer_interfaces_.cacheserviceconfiginterface.html#localstorage" class="tsd-kind-icon">local<wbr>Storage</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class"><a href="_ngx_cache_layer_interfaces_.cacheserviceconfiginterface.html#maxage" class="tsd-kind-icon">max<wbr>Age</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_cache_interfaces_.cachelayeritem.html#data" class="tsd-kind-icon">data</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_cache_interfaces_.cachelayeritem.html#key" class="tsd-kind-icon">key</a></li>
 							</ul>
 						</section>
 					</div>
@@ -95,43 +101,23 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="cacheflushinterval" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> cache<wbr>Flush<wbr>Interval</h3>
-					<div class="tsd-signature tsd-kind-icon">cache<wbr>Flush<wbr>Interval<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> =&nbsp;60 * 60 * 1000</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="data" class="tsd-anchor"></a>
+					<h3>data</h3>
+					<div class="tsd-signature tsd-kind-icon">data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">T</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Stradivario/ngx-cache-layer/blob/a9c779a/src/ngx-cache-layer.interfaces.ts#L8">ngx-cache-layer.interfaces.ts:8</a></li>
+							<li>Defined in <a href="https://github.com/rxdi/cache/blob/cedb557/src/cache.interfaces.ts#L5">cache.interfaces.ts:5</a></li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="deleteonexpire" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> delete<wbr>OnExpire</h3>
-					<div class="tsd-signature tsd-kind-icon">delete<wbr>OnExpire<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;aggressive&quot;</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="key" class="tsd-anchor"></a>
+					<h3>key</h3>
+					<div class="tsd-signature tsd-kind-icon">key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Stradivario/ngx-cache-layer/blob/a9c779a/src/ngx-cache-layer.interfaces.ts#L7">ngx-cache-layer.interfaces.ts:7</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="localstorage" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> local<wbr>Storage</h3>
-					<div class="tsd-signature tsd-kind-icon">local<wbr>Storage<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> =&nbsp;false</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/Stradivario/ngx-cache-layer/blob/a9c779a/src/ngx-cache-layer.interfaces.ts#L10">ngx-cache-layer.interfaces.ts:10</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
-					<a name="maxage" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> max<wbr>Age</h3>
-					<div class="tsd-signature tsd-kind-icon">max<wbr>Age<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> =&nbsp;15 * 60 * 1000</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/Stradivario/ngx-cache-layer/blob/a9c779a/src/ngx-cache-layer.interfaces.ts#L9">ngx-cache-layer.interfaces.ts:9</a></li>
+							<li>Defined in <a href="https://github.com/rxdi/cache/blob/cedb557/src/cache.interfaces.ts#L4">cache.interfaces.ts:4</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -144,47 +130,50 @@
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_index_.html">"index"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_ngx_cache_layer_instance_.html">"ngx-<wbr>cache-<wbr>layer.instance"</a>
+						<a href="../modules/_cache_instance_.html">"cache.instance"</a>
 					</li>
 					<li class="current tsd-kind-external-module">
-						<a href="../modules/_ngx_cache_layer_interfaces_.html">"ngx-<wbr>cache-<wbr>layer.interfaces"</a>
+						<a href="../modules/_cache_interfaces_.html">"cache.interfaces"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_ngx_cache_layer_service_.html">"ngx-<wbr>cache-<wbr>layer.service"</a>
+						<a href="../modules/_cache_service_.html">"cache.service"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_cache_service_spec_.html">"cache.service.spec"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_index_.html">"index"</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-class tsd-parent-kind-external-module">
+						<a href="../classes/_cache_interfaces_.cacheserviceconfiginterface.html" class="tsd-kind-icon">Cache<wbr>Service<wbr>Config<wbr>Interface</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_cache_interfaces_.cachelayerinterface.html" class="tsd-kind-icon">Cache<wbr>Layer<wbr>Interface</a>
+					</li>
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-class tsd-parent-kind-external-module">
-						<a href="_ngx_cache_layer_interfaces_.cacheserviceconfiginterface.html" class="tsd-kind-icon">Cache<wbr>Service<wbr>Config<wbr>Interface</a>
+					<li class="current tsd-kind-interface tsd-parent-kind-external-module tsd-has-type-parameter">
+						<a href="_cache_interfaces_.cachelayeritem.html" class="tsd-kind-icon">Cache<wbr>Layer<wbr>Item</a>
 						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="_ngx_cache_layer_interfaces_.cacheserviceconfiginterface.html#cacheflushinterval" class="tsd-kind-icon">cache<wbr>Flush<wbr>Interval</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_cache_interfaces_.cachelayeritem.html#data" class="tsd-kind-icon">data</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="_ngx_cache_layer_interfaces_.cacheserviceconfiginterface.html#deleteonexpire" class="tsd-kind-icon">delete<wbr>OnExpire</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="_ngx_cache_layer_interfaces_.cacheserviceconfiginterface.html#localstorage" class="tsd-kind-icon">local<wbr>Storage</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class">
-								<a href="_ngx_cache_layer_interfaces_.cacheserviceconfiginterface.html#maxage" class="tsd-kind-icon">max<wbr>Age</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_cache_interfaces_.cachelayeritem.html#key" class="tsd-kind-icon">key</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="../interfaces/_ngx_cache_layer_interfaces_.cachelayerinterface.html" class="tsd-kind-icon">Cache<wbr>Layer<wbr>Interface</a>
+					<li class=" tsd-kind-variable tsd-parent-kind-external-module">
+						<a href="../modules/_cache_interfaces_.html#cache_module_config" class="tsd-kind-icon">CACHE_<wbr>MODULE_<wbr>CONFIG</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module tsd-has-type-parameter">
-						<a href="../interfaces/_ngx_cache_layer_interfaces_.cachelayeritem.html" class="tsd-kind-icon">Cache<wbr>Layer<wbr>Item</a>
+					<li class=" tsd-kind-object-literal tsd-parent-kind-external-module">
+						<a href="../modules/_cache_interfaces_.html#cache_module_di_config" class="tsd-kind-icon">CACHE_<wbr>MODULE_<wbr>DI_<wbr>CONFIG</a>
 					</li>
 				</ul>
 			</nav>

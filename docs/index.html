@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ngx-cache-layer</title>
+	<title>@rxdi/cache</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
@@ -22,7 +22,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="index.html" class="title">ngx-cache-layer</a>
+					<a href="index.html" class="title">@rxdi/cache</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -56,7 +56,7 @@
 					<a href="globals.html">Globals</a>
 				</li>
 			</ul>
-			<h1> ngx-cache-layer</h1>
+			<h1> @rxdi/cache</h1>
 		</div>
 	</div>
 </header>
@@ -64,25 +64,25 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<h1 id="-ngx-cache-layer">@ngx-cache-layer</h1>
-				<p><img src="http://gitlab.youvolio.com/open-source/ngx-cache-layer/badges/branch/build.svg" alt="Build Status"></p>
+				<h1 id="-rxdi-cache">@rxdi/cache</h1>
+				<p><img src="https://api.travis-ci.org/rxdi/cache.svg?branch=master" alt="Build Status"></p>
 				<h4 id="-strongtyped-easyapi-created-on-angular-2-">@StrongTyped @EasyAPI Created on Angular@2+</h4>
 				<h4 id="-cache-layer-with-capability-to-write-in-localstorage">@Cache layer with capability to write in LocalStorage</h4>
 				<h5 id="more-detailed-documentation-you-can-find-here">More detailed documentation you can find <a href="https://stradivario.github.io/ngx-cache-layer/">here</a></h5>
-				<h5 id="for-questions-issues-you-can-write-ticket-here">For questions/issues you can write ticket <a href="http://gitlab.youvolio.com/open-source/ngx-cache-layer/issues">here</a></h5>
+				<h5 id="for-questions-issues-you-can-write-ticket-here">For questions/issues you can write ticket <a href="https://github.com/rxdi/cache">here</a></h5>
 				<h5 id="animation-explanation-">Animation explanation:</h5>
 				<p><img src="https://github.com/Stradivario/ngx-cache-layer/raw/master/docs/animation/index.gif" alt="Alt Text"></p>
 				<h2 id="installation-and-basic-examples-">Installation and basic examples:</h2>
 				<h5 id="to-install-this-library-run-">To install this library, run:</h5>
-				<pre><code class="language-bash">$ npm install ngx-cache-layer --save</code></pre>
-				<h2 id="consuming-ngx-cache-layer">Consuming @ngx-cache-layer</h2>
+				<pre><code class="language-bash">$ npm install @rxdi/cache --save</code></pre>
+				<h2 id="consuming-rxdi-cache">Consuming @rxdi/cache</h2>
 				<h4 id="import-cachemodule-forroot-in-your-angular-appmodule-">Import CacheModule.forRoot() in your Angular <code>AppModule</code>:</h4>
 				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> {BrowserModule} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/platform-browser'</span>;
 <span class="hljs-keyword">import</span> {NgModule} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;
 <span class="hljs-keyword">import</span> {AppComponent} <span class="hljs-keyword">from</span> <span class="hljs-string">'./app.component'</span>;
 
-<span class="hljs-comment">// Import @ngx-cache-layer library</span>
-<span class="hljs-keyword">import</span> {CacheModule} <span class="hljs-keyword">from</span> <span class="hljs-string">'ngx-cache-layer'</span>;
+<span class="hljs-comment">// Import @rxdi/cache library</span>
+<span class="hljs-keyword">import</span> {CacheModule} <span class="hljs-keyword">from</span> <span class="hljs-string">'@rxdi/cache'</span>;
 
 <span class="hljs-meta">@NgModule</span>({
   declarations: [
@@ -102,7 +102,7 @@
 				<h5 id="-note-every-cache-created-by-cacheservice-is-treated-like-a-layer-so-you-need-to-specify-layer-name-like-example-above"><code>***NOTE Every cache created by cacheService is treated like a LAYER , so you need to specify layer name like example above</code></h5>
 				<pre><code class="language-typescript"><span class="hljs-keyword">import</span> {Component, OnInit} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;
 <span class="hljs-keyword">import</span> {BehaviorSubject, Subscription} <span class="hljs-keyword">from</span> <span class="hljs-string">'rxjs'</span>;
-<span class="hljs-keyword">import</span> {CacheService, CacheLayer, CacheLayerItem} <span class="hljs-keyword">from</span> <span class="hljs-string">'ngx-cache-layer'</span>;
+<span class="hljs-keyword">import</span> {CacheService, CacheLayer, CacheLayerItem} <span class="hljs-keyword">from</span> <span class="hljs-string">'@rxdi/cache'</span>;
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">interface</span> Item {
   name: <span class="hljs-built_in">string</span>;
@@ -127,7 +127,7 @@
 
   ngOnInit() {
     <span class="hljs-comment">// Here we define our cache layer name, this method returns instance of class CacheLayer&lt;CacheLayerItem&lt;Item&gt;&gt;</span>
-    <span class="hljs-keyword">this</span>.exampleLayer = <span class="hljs-keyword">this</span>.cacheService.createLayer&lt;Item&gt;({
+    <span class="hljs-keyword">this</span>.exampleLayer = <span class="hljs-keyword">this</span>.cacheService.create&lt;Item&gt;({
       name: EXAMPLE_CACHE_LAYER_NAME
     });
 
@@ -137,7 +137,7 @@
     <span class="hljs-comment">// Correct implementation of subscribing to collection of layer items and work inside component with it:</span>
     <span class="hljs-comment">// Recommended way to work with cacheLayer collection items is to create another observable asObservable and use items this way</span>
     <span class="hljs-comment">// Anyway it is better to let angular view model to handle subscription itself ( cartItems | async)</span>
-    <span class="hljs-comment">// To work with collection this way you can use collection Instance returned from getLayer above (this.cacheLayer) (Examples Below)</span>
+    <span class="hljs-comment">// To work with collection this way you can use collection Instance returned from get above (this.cacheLayer) (Examples Below)</span>
 
     <span class="hljs-keyword">this</span>.subscription = <span class="hljs-keyword">this</span>.exampleLayerItems.asObservable()
       .subscribe(<span class="hljs-function"><span class="hljs-params">items</span> =&gt;</span> {
@@ -149,7 +149,9 @@
     <span class="hljs-comment">// Another method is to take values single time only per component initialization</span>
 
     <span class="hljs-keyword">this</span>.exampleLayerItems
-      .take(<span class="hljs-number">1</span>)
+      .pipe(
+        take(<span class="hljs-number">1</span>)
+      )
       .subscribe(<span class="hljs-function"><span class="hljs-params">itemCollection</span> =&gt;</span> itemCollection
         .forEach(<span class="hljs-function"><span class="hljs-params">item</span> =&gt;</span> {
           <span class="hljs-comment">// Because we define interface for this items we have the following autosuggestion from the IDE</span>
@@ -167,24 +169,24 @@
       }
     });
 
-    <span class="hljs-comment">// Get cached data from added item above will return {exampleData:'example-string'}</span>
-    <span class="hljs-keyword">const</span> exampleData = <span class="hljs-keyword">this</span>.getItem(<span class="hljs-string">'example-key'</span>);
+    <span class="hljs-comment">// Get cached data from added item above will return {data:{ name:'pesho' }}</span>
+    <span class="hljs-keyword">const</span> exampleData = <span class="hljs-keyword">this</span>.get(<span class="hljs-string">'example-key'</span>);
 
     <span class="hljs-comment">// Remove item from current layer</span>
-    <span class="hljs-keyword">this</span>.removeItem(<span class="hljs-string">'example-key'</span>);
+    <span class="hljs-keyword">this</span>.remove(<span class="hljs-string">'example-key'</span>);
 
   }
 
   createItem(data: <span class="hljs-built_in">any</span>) {
-    <span class="hljs-keyword">this</span>.exampleLayer.putItem(data);
+    <span class="hljs-keyword">this</span>.exampleLayer.put(data);
   }
 
-  getItem(key: <span class="hljs-built_in">string</span>) {
-    <span class="hljs-keyword">this</span>.exampleLayer.getItem(key);
+  <span class="hljs-keyword">get</span>(key: <span class="hljs-built_in">string</span>) {
+    <span class="hljs-keyword">this</span>.exampleLayer.get(key);
   }
 
-  removeItem(key: <span class="hljs-built_in">string</span>) {
-    <span class="hljs-keyword">this</span>.exampleLayer.removeItem(key);
+  remove(key: <span class="hljs-built_in">string</span>) {
+    <span class="hljs-keyword">this</span>.exampleLayer.remove(key);
   }
 
 }
@@ -192,37 +194,37 @@
 				<h5 id="get-our-new-created-cache-from-component-which-is-somewhere-inside-our-application">Get our new created cache from component which is somewhere inside our application</h5>
 				<pre><code class="language-typescript">
 <span class="hljs-keyword">import</span> {Injectable} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;
-<span class="hljs-keyword">import</span> {CacheService, CacheLayer} <span class="hljs-keyword">from</span> <span class="hljs-string">'ngx-cache-layer'</span>;
+<span class="hljs-keyword">import</span> {CacheService, CacheLayer} <span class="hljs-keyword">from</span> <span class="hljs-string">'@rxdi/cache'</span>;
 <span class="hljs-keyword">import</span> {EXAMPLE_CACHE_LAYER_NAME, Item} <span class="hljs-keyword">from</span> <span class="hljs-string">'./example.provider'</span>;
 
 <span class="hljs-meta">@Injectable</span>()
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> YourClass {
     cacheLayer: CacheLayer&lt;CacheLayerItem&lt;Item&gt;&gt;;
     <span class="hljs-keyword">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span>:cacheService:CacheService</span>){
-      <span class="hljs-keyword">this</span>.cacheLayer = cacheService.getLayer&lt;Item&gt;(EXAMPLE_CACHE_LAYER_NAME);
+      <span class="hljs-keyword">this</span>.cacheLayer = cacheService.get&lt;Item&gt;(EXAMPLE_CACHE_LAYER_NAME);
       <span class="hljs-comment">// Now work with this collection the same as example above;</span>
     }
 }</code></pre>
 				<h5 id="remove-cache-layer-we-created-from-other-service-or-component-">Remove cache layer we created from other service or component.</h5>
 				<pre><code class="language-typescript">
 <span class="hljs-keyword">import</span> {Injectable} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;
-<span class="hljs-keyword">import</span> {CacheService} <span class="hljs-keyword">from</span> <span class="hljs-string">'ngx-cache-layer'</span>;
+<span class="hljs-keyword">import</span> {CacheService} <span class="hljs-keyword">from</span> <span class="hljs-string">'@rxdi/cache'</span>;
 <span class="hljs-keyword">import</span> {EXAMPLE_CACHE_LAYER_NzAME} <span class="hljs-keyword">from</span> <span class="hljs-string">'./example.provider'</span>;
 
 <span class="hljs-meta">@Injectable</span>()
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> YourClass {
     <span class="hljs-keyword">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span>:cacheService:CacheService</span>) {
-      cacheService.removeLayer(EXAMPLE_CACHE_LAYER_NAME);
+      cacheService.remove(EXAMPLE_CACHE_LAYER_NAME);
     }
 }</code></pre>
 				<h3 id="complete-add-to-card-example-">COMPLETE  ADD TO CARD EXAMPLE:</h3>
 				<h5 id="create-cartprovider-which-will-help-us-to-reduce-logic-inside-component">Create CartProvider which will help us to reduce logic inside component</h5>
 				<h5 id="important-when-you-use-provider-and-define-custom-settings-you-need-to-use-provider-cache-layer-instance-">IMPORTANT When you use provider and define custom settings you need to use provider cache layer instance!</h5>
-				<h5 id="if-you-use-cacheservice-getlayer-with-the-same-cache-name-it-may-lead-to-not-initialize-current-defined-config-when-we-createlayer-with-specific-config-not-global">If you use CacheService.getLayer() with the same cache name it may lead to not initialize current defined config when we createLayer with specific config not global</h5>
-				<h5 id="without-provider-you-can-use-it-as-usual-with-getlayer-and-createlayer-it-will-be-safe-but-it-will-take-global-configuration-instead-">Without provider you can use it as usual with getLayer() and createLayer() it will be safe but it will take Global Configuration instead.</h5>
+				<h5 id="if-you-use-cacheservice-get-with-the-same-cache-name-it-may-lead-to-not-initialize-current-defined-config-when-we-create-with-specific-config-not-global">If you use CacheService.get() with the same cache name it may lead to not initialize current defined config when we create with specific config not global</h5>
+				<h5 id="without-provider-you-can-use-it-as-usual-with-get-and-create-it-will-be-safe-but-it-will-take-global-configuration-instead-">Without provider you can use it as usual with get() and create() it will be safe but it will take Global Configuration instead.</h5>
 				<pre><code class="language-typescript">
 <span class="hljs-keyword">import</span> {Injectable} <span class="hljs-keyword">from</span> <span class="hljs-string">"@angular/core"</span>;
-<span class="hljs-keyword">import</span> {CacheService, CacheLayer, CacheLayerItem, CacheServiceConfigInterface} <span class="hljs-keyword">from</span> <span class="hljs-string">"ngx-cache-layer"</span>;
+<span class="hljs-keyword">import</span> {CacheService, CacheLayer, CacheLayerItem, CacheServiceConfigInterface} <span class="hljs-keyword">from</span> <span class="hljs-string">"@rxdi/cache"</span>;
 <span class="hljs-keyword">import</span> {Product} <span class="hljs-keyword">from</span> <span class="hljs-string">"../core/config/queries/product/product.interface"</span>;
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> CART_CACHE_LAYER_NAME = <span class="hljs-string">'cart'</span>;
@@ -244,27 +246,26 @@
   items: BehaviorSubject&lt;CacheLayerItem&lt;Product&gt;[]&gt;;
 
   <span class="hljs-keyword">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> cacheService: CacheService</span>) {
-    <span class="hljs-keyword">this</span>.cacheLayer = <span class="hljs-keyword">this</span>.cacheService.createLayer&lt;Product&gt;(&lt;CacheLayerInterface&gt;{
+    <span class="hljs-keyword">this</span>.cacheLayer = <span class="hljs-keyword">this</span>.cacheService.create&lt;Product&gt;(&lt;CacheLayerInterface&gt;{
       name: CART_CACHE_LAYER_NAME,
       config: &lt;CacheServiceConfigInterface&gt;{
         localStorage: <span class="hljs-literal">true</span>,
         maxAge: <span class="hljs-number">10000</span>,
-        cacheFlushInterval: <span class="hljs-number">10000</span>,
-        deleteOnExpire: <span class="hljs-string">'aggressive'</span>
+        cacheFlushInterval: <span class="hljs-number">10000</span>
       }
     });
     <span class="hljs-keyword">this</span>.items = <span class="hljs-keyword">this</span>.cacheLayer.items;
   }
 
   putToCart(product: Product) {
-    <span class="hljs-keyword">this</span>.cacheLayer.putItem({
+    <span class="hljs-keyword">this</span>.cacheLayer.put({
       key:product.id,
       data: product
     });
   }
 
   removeFromCart(product: Product) {
-    <span class="hljs-keyword">this</span>.cacheLayer.removeItem(product.id);
+    <span class="hljs-keyword">this</span>.cacheLayer.remove(product.id);
   }
 
 }
@@ -287,7 +288,7 @@
 
   ngOnInit() {}
 
-  removeItem(product: Product) {
+  remove(product: Product) {
     <span class="hljs-keyword">this</span>.cartProvider.removeFromCard(product)
   }
 
@@ -300,8 +301,8 @@
 				<pre><code class="language-html"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> *<span class="hljs-attr">ngFor</span>=<span class="hljs-string">"let product of (cartProvider.items | async)"</span>&gt;</span>
     {{item.key}} // is cache identity
     {{item.data.id}} // Cached data from current item from card layer Observable
-    <span class="hljs-tag">&lt;<span class="hljs-name">--</span> <span class="hljs-attr">removeItemKey</span> <span class="hljs-attr">in</span> <span class="hljs-attr">my</span> <span class="hljs-attr">case</span> <span class="hljs-attr">item.id</span> <span class="hljs-attr">is</span> <span class="hljs-attr">unique</span> <span class="hljs-attr">so</span> <span class="hljs-attr">i</span> <span class="hljs-attr">should</span> <span class="hljs-attr">remove</span> <span class="hljs-attr">item</span> <span class="hljs-attr">id</span> <span class="hljs-attr">--</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"removeItem(product)"</span>&gt;</span>Remove item<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">--</span> <span class="hljs-attr">removeKey</span> <span class="hljs-attr">in</span> <span class="hljs-attr">my</span> <span class="hljs-attr">case</span> <span class="hljs-attr">item.id</span> <span class="hljs-attr">is</span> <span class="hljs-attr">unique</span> <span class="hljs-attr">so</span> <span class="hljs-attr">i</span> <span class="hljs-attr">should</span> <span class="hljs-attr">remove</span> <span class="hljs-attr">item</span> <span class="hljs-attr">id</span> <span class="hljs-attr">--</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"remove(product)"</span>&gt;</span>Remove item<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></code></pre>
 				<br>
 				<h3 id="how-to-define-globalconfiguration">How to define GlobalConfiguration</h3>
@@ -309,8 +310,8 @@
 <span class="hljs-keyword">import</span> {NgModule} <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;
 <span class="hljs-keyword">import</span> {AppComponent} <span class="hljs-keyword">from</span> <span class="hljs-string">'./app.component'</span>;
 
-<span class="hljs-comment">// Import ngx-cache-layer</span>
-<span class="hljs-keyword">import</span> {CacheModule, CacheConfigInterface} <span class="hljs-keyword">from</span> <span class="hljs-string">'ngx-cache-layer'</span>;
+<span class="hljs-comment">// Import rxdi/cache</span>
+<span class="hljs-keyword">import</span> {CacheModule, CacheConfigInterface} <span class="hljs-keyword">from</span> <span class="hljs-string">'@rxdi/cache'</span>;
 
 <span class="hljs-comment">// Define global configuration</span>
 <span class="hljs-comment">// You can set localStorage to true it will cache every layers like a localStorage item</span>
@@ -319,7 +320,6 @@
     localStorage: <span class="hljs-literal">true</span>,
     maxAge: <span class="hljs-number">15</span> * <span class="hljs-number">60</span> * <span class="hljs-number">1000</span>, <span class="hljs-comment">// Items added to this cache expire after 15 minutes</span>
     cacheFlushInterval: <span class="hljs-number">60</span> * <span class="hljs-number">60</span> * <span class="hljs-number">1000</span>, <span class="hljs-comment">// This cache will clear itself every hour</span>
-    deleteOnExpire: <span class="hljs-string">'aggressive'</span> <span class="hljs-comment">// Items will be deleted from this cache when they expire</span>
 }
 
 <span class="hljs-meta">@NgModule</span>({
@@ -338,21 +338,21 @@
 				<br>
 				<h3 id="service-methods">Service methods</h3>
 				<h5 id="create-cache-layer">Create cache layer</h5>
-				<pre><code class="language-typescript">CacheService.createLayer&lt;<span class="hljs-built_in">any</span>&gt;({name: <span class="hljs-string">'layer-name'</span>, settings?: CacheLayerInterface})</code></pre>
-				<p><code>Optional you can define custom settings for every layer that you create just insert CacheLayerInterface from ngx-cache-layer like example for global config above</code></p>
+				<pre><code class="language-typescript">CacheService.create&lt;<span class="hljs-built_in">any</span>&gt;({name: <span class="hljs-string">'layer-name'</span>, settings?: CacheLayerInterface})</code></pre>
+				<p><code>Optional you can define custom settings for every layer that you create just insert CacheLayerInterface from rxdi/cache like example for global config above</code></p>
 				<p>Returns: <code>Instance of CacheLayer class</code>
 				Optional: <code>settings interface CacheLayerInterface</code></p>
 				<h5 id="get-layer-from-cache">Get layer from cache</h5>
-				<pre><code class="language-typescript">CacheService.getLayer&lt;<span class="hljs-built_in">any</span>&gt;(<span class="hljs-string">'layer-name'</span>);</code></pre>
+				<pre><code class="language-typescript">CacheService.get&lt;<span class="hljs-built_in">any</span>&gt;(<span class="hljs-string">'layer-name'</span>);</code></pre>
 				<p>Returns: <code>Instance of CacheLayer class</code></p>
 				<h5 id="remove-layer-from-cache">Remove layer from cache</h5>
-				<pre><code class="language-typescript">CacheService.removeLayer(<span class="hljs-string">'layer-name'</span>);</code></pre>
+				<pre><code class="language-typescript">CacheService.remove(<span class="hljs-string">'layer-name'</span>);</code></pre>
 				<p>Returns: <code>void</code></p>
 				<pre><code class="language-typescript">CacheLayer.createCacheParams({key: <span class="hljs-string">'endpoint-key'</span>, params: {exampleParam: <span class="hljs-string">'test'</span>}});</code></pre>
 				<h5 id="create-cache-with-parameters-static-public-method-of-cachelayer-class">Create Cache with parameters static public method of CacheLayer Class</h5>
 				<h6 id="usage-when-you-have-api-endpoints-with-custom-parameters-and-you-need-to-cache-result-returned-from-response">Usage: when you have api endpoints with custom parameters and you need to cache result returned from response</h6>
 				<p>Complete cache for endpoint with 8 rows more code without it :)</p>
-				<pre><code class="language-typescript"><span class="hljs-keyword">const</span> endpointCache = <span class="hljs-keyword">this</span>.cacheService.getLayer(<span class="hljs-string">'endpoint-cache'</span>);
+				<pre><code class="language-typescript"><span class="hljs-keyword">const</span> endpointCache = <span class="hljs-keyword">this</span>.cacheService.get(<span class="hljs-string">'endpoint-cache'</span>);
 
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">getUserById</span>(<span class="hljs-params">id: <span class="hljs-built_in">number</span></span>) </span>{
   <span class="hljs-keyword">return</span> Observable.create(<span class="hljs-function"><span class="hljs-params">observer</span> =&gt;</span> {
@@ -361,28 +361,32 @@
       client_credentials: <span class="hljs-literal">true</span>,
     };
     <span class="hljs-keyword">const</span> cacheAddress = CacheLayer.createCacheParams({ key: ENDPOINT, params: PARAMS });
-    <span class="hljs-keyword">if</span> (endpointCache.getItem(cacheAddress)) {
-      <span class="hljs-keyword">return</span> observer.next(endpointCache.getItem(cacheAddress));
+    <span class="hljs-keyword">if</span> (endpointCache.get(cacheAddress)) {
+      <span class="hljs-keyword">return</span> observer.next(endpointCache.get(cacheAddress));
     }
-    <span class="hljs-comment">// endpointCache.putItem method like getItem returns instance of cached item so we can safely return to the observer above</span>
+    <span class="hljs-comment">// endpointCache.put method like get returns instance of cached item so we can safely return to the observer above</span>
     <span class="hljs-keyword">this</span>.http.post(ENDPOINT, PARAMS)
     .map(<span class="hljs-function"><span class="hljs-params">user</span> =&gt;</span>
-        observer.next(endpointCache.putItem({ key: cacheAddress, data: user.json() }))
+        observer.next(endpointCache.put({ key: cacheAddress, data: user.json() }))
     )
     .subscribe()
   });
 }</code></pre>
 				<br>
 				<h3 id="cache-layer-instance-methods">Cache Layer Instance methods</h3>
-				<pre><code class="language-typescript"><span class="hljs-keyword">const</span> cache = CacheService.getLayer&lt;<span class="hljs-built_in">any</span>&gt;(<span class="hljs-string">'layer-name'</span>);</code></pre>
+				<pre><code class="language-typescript"><span class="hljs-keyword">const</span> cache = CacheService.get&lt;T&gt;(<span class="hljs-string">'layer-name'</span>);</code></pre>
 				<h5 id="put-item-to-cache">Put item to cache</h5>
-				<pre><code class="language-typescript">cache.putItem({key:<span class="hljs-string">'example-key'</span>, data:{exampleData:<span class="hljs-string">''</span>}});</code></pre>
+				<pre><code class="language-typescript">cache.put({ key:<span class="hljs-string">'example-key'</span>, data: { exampleData:<span class="hljs-string">''</span> } });</code></pre>
 				<h5 id="get-item-from-cache">Get item from cache</h5>
-				<pre><code class="language-typescript">cache.getItem(<span class="hljs-string">'example-key'</span>);</code></pre>
+				<pre><code class="language-typescript">cache.get(<span class="hljs-string">'example-key'</span>);</code></pre>
 				<h5 id="get-item-from-cache-as-observable-it-will-emit-every-value-changed-for-that-specific-key">Get item from cache as observable it will emit every value changed for that specific key</h5>
-				<pre><code class="language-typescript">cache.getItemObservable(<span class="hljs-string">'example-key'</span>);</code></pre>
+				<pre><code class="language-typescript">cache.asObservable(<span class="hljs-string">'example-key'</span>);</code></pre>
 				<h5 id="remove-item-from-cache">Remove item from cache</h5>
-				<pre><code class="language-typescript">cache.removeItem(<span class="hljs-string">'example-key'</span>);</code></pre>
+				<pre><code class="language-typescript">cache.remove(<span class="hljs-string">'example-key'</span>);</code></pre>
+				<h5 id="get-items-as-observable-will-emit-value-in-the-moment-when-it-is-populated-">Get items as observable (will emit value in the moment when it is populated)</h5>
+				<pre><code class="language-typescript">cache.items.asObservable();</code></pre>
+				<h5 id="cache-all-data-from-the-request-it-uses-native-fetch-inside-browser-and-will-cache-particular-request-to-collection">Cache all data from the request. It uses native <code>fetch</code> inside browser and will cache particular request to collection</h5>
+				<pre><code class="language-typescript">cache.fetch&lt;T&gt;(<span class="hljs-string">'https://api.github.com/repos/rxdi/core/releases'</span>);</code></pre>
 				<br>
 				<h1 id="notes-">NOTES:</h1>
 				<br>
@@ -393,7 +397,7 @@
 				<h4 id="inside-html-when-you-use-cartitems-async-async-pipe-the-view-handles-this-automatically-">Inside html when you use ( cartItems | async ) async pipe the view handles this automatically.`</h4>
 				<pre><code class="language-typescript">
   ngOnInit() {
-    <span class="hljs-keyword">this</span>.cacheLayer = <span class="hljs-keyword">this</span>.cache.getLayer&lt;Product&gt;(CART_CACHE_LAYER_NAME);
+    <span class="hljs-keyword">this</span>.cacheLayer = <span class="hljs-keyword">this</span>.cache.get&lt;Product&gt;(CART_CACHE_LAYER_NAME);
     <span class="hljs-keyword">this</span>.cartItems = <span class="hljs-keyword">this</span>.cacheLayer.items;
 
 
@@ -405,7 +409,7 @@
       });
 
     <span class="hljs-comment">// ANOTHER CORRECT EXAMPLE (this method will subscribe only once and you cannot get new results if there are any new)</span>
-    <span class="hljs-keyword">this</span>.cartItems.take(<span class="hljs-number">1</span>).subscribe(<span class="hljs-function"><span class="hljs-params">collection</span> =&gt;</span> {
+    <span class="hljs-keyword">this</span>.cartItems.pipe(take(<span class="hljs-number">1</span>)).subscribe(<span class="hljs-function"><span class="hljs-params">collection</span> =&gt;</span> {
       <span class="hljs-comment">// Do something with collection here and initialize only once inside component</span>
     });
 
@@ -435,16 +439,19 @@
 						<a href="globals.html"><em>Globals</em></a>
 					</li>
 					<li class=" tsd-kind-external-module">
+						<a href="modules/_cache_instance_.html">"cache.instance"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_cache_interfaces_.html">"cache.interfaces"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_cache_service_.html">"cache.service"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_cache_service_spec_.html">"cache.service.spec"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
 						<a href="modules/_index_.html">"index"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_ngx_cache_layer_instance_.html">"ngx-<wbr>cache-<wbr>layer.instance"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_ngx_cache_layer_interfaces_.html">"ngx-<wbr>cache-<wbr>layer.interfaces"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_ngx_cache_layer_service_.html">"ngx-<wbr>cache-<wbr>layer.service"</a>
 					</li>
 				</ul>
 			</nav>
