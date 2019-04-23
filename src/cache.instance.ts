@@ -122,7 +122,7 @@ export class CacheLayerInstance<T = {}> {
   }
 
   public asObservable(key: string): Observable<T> {
-    if (this.map.has(key)) {
+    if (!this.map.has(key)) {
       console.error(
         `Key: ${key} ${FRIENDLY_ERROR_MESSAGES.MISSING_OBSERVABLE_ITEM}`
       );
