@@ -33,7 +33,6 @@ export class CacheLayerInstance<T = {}> {
     this.config = layer.config;
     this.createdAt = layer.createdAt;
     if (this.config.localStorage) {
-      // tslint:disable-next-line:no-string-literal
       layer.items.forEach(item => this.map.set(item['key'], item));
       if (layer.items.constructor === BehaviorSubject) {
         layer.items = layer.items.getValue() || [];
@@ -50,13 +49,11 @@ export class CacheLayerInstance<T = {}> {
   }
 
   private onExpireAll(layer) {
-    // tslint:disable-next-line:no-string-literal
     layer.items.forEach(item => this.onExpire(item['key']));
   }
 
   private putHook(layerItem): void {
     if (this.config.cacheFlushInterval) {
-      // tslint:disable-next-line:no-string-literal
       this.onExpire(layerItem['key']);
     }
   }
@@ -70,11 +67,8 @@ export class CacheLayerInstance<T = {}> {
   }
 
   public put(layerItem): T {
-    // tslint:disable-next-line:no-string-literal
     this.map.set(layerItem['key'], layerItem);
-    // tslint:disable-next-line:no-string-literal
     const item = this.map.get(layerItem['key']);
-    // tslint:disable-next-line:no-string-literal
     const filteredItems = this.items
       .getValue()
       .filter(i => i['key'] !== layerItem['key']);
@@ -105,7 +99,6 @@ export class CacheLayerInstance<T = {}> {
   }
 
   public removeItem(key: string): void {
-    // tslint:disable-next-line:no-string-literal
     const newLayerItems = this.items
       .getValue()
       .filter(item => item['key'] !== key);
@@ -122,11 +115,6 @@ export class CacheLayerInstance<T = {}> {
   }
 
   public asObservable(key: string): Observable<T> {
-    if (!this.map.has(key)) {
-      console.error(
-        `Key: ${key} ${FRIENDLY_ERROR_MESSAGES.MISSING_OBSERVABLE_ITEM}`
-      );
-    }
     return this.items.asObservable().pipe(
       filter(() => this.map.has(key)),
       map(() => this.get(key))
@@ -143,7 +131,6 @@ export class CacheLayerInstance<T = {}> {
 
   async fetch<K>(http: string, init?: RequestInit, cache = true): Promise<K> {
     if (this.config.localStorage && this.get(http) && cache) {
-      // tslint:disable-next-line:no-string-literal
       return this.get(http)['data'];
     }
     const data: K = await (await fetch(http)).json();

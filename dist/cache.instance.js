@@ -21,7 +21,6 @@ class CacheLayerInstance {
         this.config = layer.config;
         this.createdAt = layer.createdAt;
         if (this.config.localStorage) {
-            // tslint:disable-next-line:no-string-literal
             layer.items.forEach(item => this.map.set(item['key'], item));
             if (layer.items.constructor === rxjs_1.BehaviorSubject) {
                 layer.items = layer.items.getValue() || [];
@@ -51,12 +50,10 @@ class CacheLayerInstance {
         }
     }
     onExpireAll(layer) {
-        // tslint:disable-next-line:no-string-literal
         layer.items.forEach(item => this.onExpire(item['key']));
     }
     putHook(layerItem) {
         if (this.config.cacheFlushInterval) {
-            // tslint:disable-next-line:no-string-literal
             this.onExpire(layerItem['key']);
         }
     }
@@ -69,12 +66,11 @@ class CacheLayerInstance {
         }
     }
     put(layerItem) {
-        // tslint:disable-next-line:no-string-literal
         this.map.set(layerItem['key'], layerItem);
-        // tslint:disable-next-line:no-string-literal
         const item = this.map.get(layerItem['key']);
-        // tslint:disable-next-line:no-string-literal
-        const filteredItems = this.items.getValue().filter(i => i['key'] !== layerItem['key']);
+        const filteredItems = this.items
+            .getValue()
+            .filter(i => i['key'] !== layerItem['key']);
         if (this.config.localStorage) {
             localStorage.setItem(this.name, JSON.stringify({
                 createdAt: this.createdAt,
@@ -89,11 +85,13 @@ class CacheLayerInstance {
     }
     onExpire(key) {
         new rxjs_1.Observable(observer => observer.next())
-            .pipe(operators_1.timeoutWith(this.config.cacheFlushInterval, rxjs_1.of(1)), operators_1.skip(1)).subscribe(() => this.removeItem(key));
+            .pipe(operators_1.timeoutWith(this.config.cacheFlushInterval, rxjs_1.of(1)), operators_1.skip(1))
+            .subscribe(() => this.removeItem(key));
     }
     removeItem(key) {
-        // tslint:disable-next-line:no-string-literal
-        const newLayerItems = this.items.getValue().filter(item => item['key'] !== key);
+        const newLayerItems = this.items
+            .getValue()
+            .filter(item => item['key'] !== key);
         if (this.config.localStorage) {
             const newLayer = {
                 config: this.config,
@@ -106,9 +104,6 @@ class CacheLayerInstance {
         this.items.next(newLayerItems);
     }
     asObservable(key) {
-        if (this.map.has(key)) {
-            console.error(`Key: ${key} ${FRIENDLY_ERROR_MESSAGES.MISSING_OBSERVABLE_ITEM}`);
-        }
         return this.items.asObservable().pipe(operators_1.filter(() => this.map.has(key)), operators_1.map(() => this.get(key)));
     }
     flushCache() {
@@ -121,7 +116,6 @@ class CacheLayerInstance {
     fetch(http, init, cache = true) {
         return __awaiter(this, void 0, void 0, function* () {
             if (this.config.localStorage && this.get(http) && cache) {
-                // tslint:disable-next-line:no-string-literal
                 return this.get(http)['data'];
             }
             const data = yield (yield fetch(http)).json();

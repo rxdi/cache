@@ -18,11 +18,11 @@ const rxjs_1 = require("rxjs");
 const operators_1 = require("rxjs/operators");
 const cache_instance_1 = require("./cache.instance");
 const cache_interfaces_1 = require("./cache.interfaces");
-const INTERNAL_PROCEDURE_CACHE_NAME = "cache_layers";
+const INTERNAL_PROCEDURE_CACHE_NAME = 'cache_layers';
 const FRIENDLY_ERROR_MESSAGES = {
-    TRY_TO_UNSUBSCRIBE: "Someone try to unsubscribe from collection directly... agghhh.. read docs! Blame: ",
+    TRY_TO_UNSUBSCRIBE: 'Someone try to unsubscribe from collection directly... agghhh.. read docs! Blame: ',
     // tslint:disable-next-line:max-line-length
-    LOCAL_STORAGE_DISABLED: "LocalStorage is disabled switching to regular in-memory storage.Please relate issue if you think it is enabled and there is a problem with the library itself."
+    LOCAL_STORAGE_DISABLED: 'LocalStorage is disabled switching to regular in-memory storage.Please relate issue if you think it is enabled and there is a problem with the library itself.'
 };
 let CacheService = CacheService_1 = class CacheService {
     constructor(config) {
@@ -53,8 +53,8 @@ let CacheService = CacheService_1 = class CacheService {
     static isLocalStorageUsable() {
         const error = [];
         try {
-            localStorage.setItem("test-key", JSON.stringify({ key: "test-object" }));
-            localStorage.removeItem("test-key");
+            localStorage.setItem('test-key', JSON.stringify({ key: 'test-object' }));
+            localStorage.removeItem('test-key');
         }
         catch (e) {
             error.push(e);
@@ -133,13 +133,11 @@ let CacheService = CacheService_1 = class CacheService {
     }
     transferItems(name, newCacheLayers) {
         const oldLayer = this.get(name);
-        const newLayers = [];
-        newCacheLayers.forEach(layerName => {
+        return [...newCacheLayers].map(layerName => {
             const newLayer = this.create(layerName);
             oldLayer.items.getValue().forEach(item => newLayer.put(item));
-            newLayers.push(newLayer);
+            return newLayer;
         });
-        return newLayers;
     }
     flushCache(force) {
         return new rxjs_1.Observable(o => {
