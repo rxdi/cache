@@ -1,6 +1,6 @@
-import { Inject, Injectable } from '@angular/core';
+import { Inject, Injectable } from '@rxdi/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { take, map, timeoutWith, skip } from 'rxjs/operators';
+import { take, timeoutWith, skip } from 'rxjs/operators';
 import { CacheLayerInstance } from './cache.instance';
 import {
   CacheLayerInterface,

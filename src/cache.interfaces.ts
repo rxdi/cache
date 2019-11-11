@@ -1,4 +1,4 @@
-import { InjectionToken } from '@angular/core';
+import { InjectionToken } from '@rxdi/core';
 
 export interface CacheLayerItem<T> {
   key: string;
